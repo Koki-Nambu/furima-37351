@@ -26,8 +26,8 @@ has_many :purchases_records
 
 ## itemsテーブル
 
-| Column           | Type       | Options                        |
-| -----------------| -----------| -------------------------------|
+| Column              | Type       | Options                        |
+| --------------------| -----------| -------------------------------|
 | title               | string     | null: false                    |
 | explanation         | text       | null: false                    |
 | category_id         | integer    | null: false                    |
@@ -36,6 +36,7 @@ has_many :purchases_records
 | shipping_area_id    | integer    | null: false                    |
 | days_to_ship_id     | integer    | null: false                    |
 | price               | integer    | null: false                    |
+| user                | references | foreign_key: true              |
 
 
 ### Association
