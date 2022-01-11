@@ -6,19 +6,17 @@
 | -----------------------| -----------| -------------------------------|
 | nickname               | string     | null: false                    |
 | email                  | string     | null: false, unique: true      |
-| password               | string     | null: false                    |
+| encrypted_password     | string     | null: false                    |
 | first_name_full_width  | string     | null: false                    |
 | last_name_full_width   | string     | null: false                    |
 | first_name_kana        | string     | null: false                    |
 | last_name_kana         | string     | null: false                    |
-| date_of_birth          | integer    | null: false                    |
-| shipping_address       | references | null: false, foreign_key: true |
+| date_of_birth          | date       | null: false                    |
 
 
 ### Association
 has_many :items
 has_many :purchases_records
-has_one :shipping_address
 
 
 
@@ -30,15 +28,14 @@ has_one :shipping_address
 
 | Column           | Type       | Options                        |
 | -----------------| -----------| -------------------------------|
-| image            | string     | null: false                    |
-| title            | string     | null: false                    |
-| explanation      | string     | null: false                    |
-| category         | string     | null: false                    |
-| status           | string     | null: false                    |
-| delivery_charge  | string     | null: false                    |
-| shipping_area    | string     | null: false                    |
-| days_to_ship     | string     | null: false                    |
-| price            | integer    | null: false                    |
+| title               | string     | null: false                    |
+| explanation         | text       | null: false                    |
+| category_id         | integer    | null: false                    |
+| status_id           | integer    | null: false                    |
+| delivery_charge_id  | integer    | null: false                    |
+| shipping_area_id    | integer    | null: false                    |
+| days_to_ship_id     | integer    | null: false                    |
+| price               | integer    | null: false                    |
 
 
 ### Association
@@ -53,11 +50,10 @@ has_one :purchases_record
 
 ## purchases_recordsテーブル
 
-| Column           | Type       | Options                        |
-| -----------------| -----------| -------------------------------|
-| user             | references | null: false, foreign_key: true |
-| item             | references | null: false, foreign_key: true |
-| shipping_address | references | null: false, foreign_key: true |
+| Column           | Type       | Options           |
+| -----------------| -----------| ------------------|
+| user             | references | foreign_key: true |
+| item             | references | foreign_key: true |
 
 ### Association
 has_one :shipping_address
@@ -76,15 +72,14 @@ belongs_to :item
 | Column            | Type       | Options                        |
 | ------------------| -----------| -------------------------------|
 | post_code         | string     | null: false                    |
-| prefectures       | string     | null: false                    |
+| shipping_area_id  | integer    | null: false                    |
 | municipalities    | string     | null: false                    |
 | address           | string     | null: false                    |
-| building_name     | string     | null: false                    |
-| telephone_number  | integer    | null: false                    |
-| user              | references | null: false                    |
+| building_name     | string     |                                |
+| telephone_number  | string     | null: false                    |
+| purchases_record  | references | foreign_key: true              |
 
 
 
 ### Association
-belongs_to :user
 belongs_to :purchases_record
