@@ -9,13 +9,13 @@ class User < ApplicationRecord
 
   validates :nickname, presence: true
 
-  with_options presence: true, format: { with: /\A[ぁ-んァ-ン一-龥]+\z/, message: '全角文字を使用してください' } do
-    validates :first_name_full_width, :last_name_full_width, presence:true
+  with_options presence: true, format: { with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/, message: '全角文字を使用してください' } do
+    validates :first_name_full_width, :last_name_full_width
   end
 
-  with_options presence: true, format: { with: /\A[ァ-ン]+\z/, message: '全角カタカナを入力してください' } do
-    validates :first_name_kana, presence: true
-    validates :last_name_kana, presence: true
+  with_options presence: true, format: { with: /\A[ァ-ヶー]+\z/, message: '全角カタカナを入力してください' } do
+    validates :first_name_kana
+    validates :last_name_kana
   end
 
   validates :date_of_birth, presence: true
