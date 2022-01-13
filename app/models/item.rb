@@ -8,7 +8,8 @@ class Item < ApplicationRecord
     belongs_to :shipping_area
     belongs_to :delivery_charge
     belongs_to :status
-  
+
+    validates :image, presence: true
     validates :title, :explanation, presence: true
     validates :category_id, :days_to_ship_id, :shipping_area_id, :delivery_charge_id, :status_id, numericality: { other_than: 1 , message: "Can't be blank"} 
     
