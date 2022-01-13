@@ -52,12 +52,8 @@ class ItemsController < ApplicationController
   end
 
   def move_to_index
-    if user_signed_in?
-      if current_user.id == @item.user.id
-
-      else
+    unless current_user.id == @item.user.id
         redirect_to action: :index
-      end
     end
   end
     
