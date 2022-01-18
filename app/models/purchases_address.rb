@@ -1,6 +1,6 @@
 class PurchasesAddress
   include ActiveModel::Model 
-  attr_accessor :post_code, :shipping_area_id, :municipalities, :address, :building_name, :telephone_number, :purchases_record_id, :user_id, :item_id
+  attr_accessor :post_code, :shipping_area_id, :municipalities, :address, :building_name, :telephone_number, :purchases_record_id, :user_id, :item_id, :token
 
 
 
@@ -11,6 +11,7 @@ class PurchasesAddress
     validates :telephone_number, format: {with: /\d{10,11}/, allow_blank: true}, length: {maximum: 11}
     validates :user_id
     validates :item_id
+    validates :token
   end
 
   def save
