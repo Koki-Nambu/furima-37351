@@ -2,6 +2,7 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit, :destroy]
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :move_to_index, only: [:edit, :destroy]
+  before_action :sold_edit, only: [:edit]
 
   def index
     @items = Item.all.order("created_at DESC")
@@ -47,7 +48,6 @@ class ItemsController < ApplicationController
   end
 
   def set_item
-
     @item = Item.find(params[:id])
   end
 
@@ -57,4 +57,9 @@ class ItemsController < ApplicationController
     end
   end
     
+  def sold_edit
+    if @item.purchases_record.present?
+      redirect_to action: :index
+    end
+  end
 end
