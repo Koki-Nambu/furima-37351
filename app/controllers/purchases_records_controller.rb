@@ -2,6 +2,7 @@ class PurchasesRecordsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_item, only: [:index, :create]
   before_action :sold_action, only: [:index]
+  before_action :sold_self, only: [:index]
   
 
   def index
@@ -42,6 +43,12 @@ class PurchasesRecordsController < ApplicationController
 
   def sold_action
     if @item.purchases_record.present?
+      redirect_to root_path
+    end
+  end
+
+  def sold_self
+    if current_user.id == @item.user.id
       redirect_to root_path
     end
   end
