@@ -63,6 +63,18 @@ RSpec.describe PurchasesAddress, type: :model do
         expect(@purchases_address.errors.full_messages).to include("Telephone number is invalid")
       end
 
+      it '電話番号が9桁以下では購入できない' do
+        @purchases_address.telephone_number = '123456789'
+        @purchases_address.valid?
+        expect(@purchases_address.errors.full_messages).to include("Telephone number is invalid")
+      end
+
+      it '電話番号が12桁以上では購入できない' do
+        @purchases_address.telephone_number = '123456789102'
+        @purchases_address.valid?
+        expect(@purchases_address.errors.full_messages).to include("Telephone number is too long (maximum is 11 characters)")
+      end
+
       it 'トークンが空では購入できない' do
         @purchases_address.token = nil
         @purchases_address.valid?
