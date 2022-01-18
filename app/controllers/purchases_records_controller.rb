@@ -1,6 +1,8 @@
 class PurchasesRecordsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_item, only: [:index, :create]
-
+  before_action :sold_action, only: [:index]
+  
 
   def index
     @purchases_address = PurchasesAddress.new
@@ -36,5 +38,11 @@ class PurchasesRecordsController < ApplicationController
       card: purchases_address_params[:token],
       currency: 'jpy'
     )
+  end
+
+  def sold_action
+    if @item.purchases_record.present?
+      redirect_to root_path
+    end
   end
 end
